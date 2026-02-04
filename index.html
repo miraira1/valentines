@@ -292,13 +292,9 @@
             "OK, last chance!"
         ];
         
-        // Make No button run away when mouse gets near it
-        noBtn.addEventListener('mouseover', function() {
-            moveNoButtonRandomScreen();
-        });
-        
-        // Also run away when clicked
-        noBtn.addEventListener('click', function() {
+        // Run away when clicked
+        noBtn.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default button behavior
             noButtonClicks++;
             
             if (noButtonClicks < escapeMessages.length) {
@@ -351,13 +347,8 @@
             noBtn.style.top = `${randomY}px`;
             noBtn.style.zIndex = '1000';
             
-            // Make button smaller after a few clicks
-            if (noButtonClicks > 3) {
-                const newSize = 90 - (noButtonClicks * 5);
-                noBtn.style.padding = `${newSize/8}px ${newSize/4}px`;
-                noBtn.style.fontSize = `${Math.max(newSize/8, 0.8)}rem`;
-                noBtn.style.height = `${newSize}px`;
-            }
+            // REMOVED: Code that makes button smaller after clicks
+            // Button stays the same size now
             
             // Add a little bounce animation
             noBtn.animate([
